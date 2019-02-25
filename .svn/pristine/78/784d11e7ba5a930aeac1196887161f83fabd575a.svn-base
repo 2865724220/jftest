@@ -1,0 +1,101 @@
+.regroup_earnings {
+    display: flex;
+    font-size: 14px;
+    color: #6A7C98;
+    height: 50px;
+    background: #EFF3F7;
+    line-height: 50px;
+}
+.regroup_earnings .appraisement {
+    margin-left: 15px;
+}
+.regroup_earnings .earnings {
+    margin-left: 50px;
+}
+.activeFont {
+    font-size: 18px;
+    color: #08142C;
+}
+.toDiagnose {
+    display: flex;
+    padding: 0 15px;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 70px;
+    background: #fff;
+}
+.toDiagnose_left {
+    width: 70%;
+}
+.toDiagnose_leftName {
+    font-size: 16px;
+    color: #454545;
+}
+.left_detail {
+    font-size: 12px;
+    color: #6A7C98;
+    display: flex;
+    line-height: 20px;
+}
+.toDiagnose_right {
+    font-size: 16px;
+    color: #2189EC;
+    line-height: 70px;
+    display: flex;
+    align-items: center;
+}
+.toDiagnose_right > img{
+    width: 8px;
+    height: 16px;
+    margin-left: 9px;
+}
+.left_detail .left_detailType {
+    margin-left: 15px;
+}
+.detailTypeActive {
+    border: 1px solid #6A7C98;
+    border-radius: 5px;
+    padding: 0 5px;
+    color: #6A7C98;
+    /**color: #FF4F29;*/
+}
+.backWhite {
+    background: #fff;
+    border-top: 1px solid #ccc;
+}
+.marginNone {
+    margin-top: 0;
+}
+.regroup_emporty {
+    width: 100%;
+    height: 330px;
+    text-align: center;
+    line-height: 330px;
+    background: #fff;
+}
+.regroup_headEmporty {
+    border-top: 1px solid #ccc;
+    width: 100%;
+    height: 268px;
+    background: #fff;
+    text-align: center;
+    line-height: 268px;
+}
+.reg_fundTabEmporty {
+    width: 100%;
+    height: 50px;
+    font-size: 14px;
+    line-height: 50px;
+    text-align: center;
+}
+.fundTypeEmpty {
+    font-size: 14px;
+    text-align: center;
+    line-height: 50px;
+}
+.fund_fontStyle {
+    font-size: 14px;
+    color: #6B7D97;
+    padding-bottom: 12px;
+}

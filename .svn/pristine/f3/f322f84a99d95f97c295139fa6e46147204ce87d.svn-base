@@ -1,0 +1,54 @@
+import React, { Component } from "react";
+import './progressFund.css'
+class Diagnose extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            itemsList: [
+                {
+                    name: ''
+                },
+                {
+                    name: ''
+                },
+                {
+                    name: ''
+                },
+                {
+                    name: ''
+                }
+            ]
+        }
+    }
+
+    componentDidMount() {
+    }
+    render() {
+        const {itemsList} = this.state;
+        return (
+            <div className="progress">
+                <ul className="progress_status">
+                    {
+                        itemsList.map((item, i) => {
+                            return (
+                                <li key={i}>
+                                    <div className='progress_li'>
+                                        <div className="progress_liLeft">
+                                            <div className="left_round"></div>
+                                            <div className={i === itemsList.length - 1 ? '' : 'left_line'}></div>
+                                        </div>
+                                        <div className="progress_right">
+                                            <div className="progress_statusTit">该基金中仓频道减持</div>
+                                            <div className="progress_statusCon">2017-08-17 23:31</div>
+                                        </div>
+                                    </div>
+                                </li>
+                            )
+                        })
+                    }
+                </ul>
+            </div>
+        )
+    }
+}
+export default Diagnose

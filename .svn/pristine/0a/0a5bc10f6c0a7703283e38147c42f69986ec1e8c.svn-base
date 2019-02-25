@@ -1,0 +1,34 @@
+.progress {
+    background: #fff;
+    width: 85%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 40px 0;
+}
+.progress_li {
+    display: flex;
+    /* justify-content: space-between; */
+    padding-left: 15px;
+}
+.progress_li .progress_liLeft {
+    padding-top: 10px;
+}
+.progress_li .left_round {
+    background: #079EF6;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+.progress_li .left_line {
+    background: #ccc;
+    width: 3px;
+    height: 60px;
+    margin: 0 auto;
+    margin-bottom: -10px;
+    text-align: center;
+}
+.progress_li .progress_right {
+    margin-left: 20px;
+}

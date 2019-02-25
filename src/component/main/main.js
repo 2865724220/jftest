@@ -1,0 +1,156 @@
+import React, { Component } from 'react';
+import ReactEcharts from 'echarts-for-react';
+import {host, orgId} from '../common/common';
+import FundFirst from './fundFirst'
+
+
+
+class Main extends Component {
+    constructor(props){
+        super(props)
+        this.state={
+            fundEval:{},
+            fundE:[],
+            realTime:'',
+            f208:false,
+            dataXT:[],
+            priceL:[],
+            loading:true,
+            newP:'',
+            YDay:'',
+            dataX:["0930","0931", "0932", "0933", "0934", "0935", "0936", "0937", "0938", "0939", "0940", "0941", "0942", "0943", "0944", "0945", "0946", "0947", "0948", "0949", "0950", "0951", "0952", "0953", "0954", "0955", "0956", "0957", "0958", "0959", "1000", "1001", "1002", "1003", "1004", "1005", "1006", "1007", "1008", "1009", "1010", "1011", "1012", "1013", "1014", "1015", "1016", "1017", "1018", "1019", "1020", "1021", "1022", "1023", "1024", "1025", "1026", "1027", "1028", "1029", "1030", "1031", "1032", "1033", "1034", "1035", "1036", "1037", "1038", "1039", "1040", "1041", "1042", "1043", "1044", "1045", "1046", "1047", "1048", "1049", "1050", "1051", "1052", "1053", "1054", "1055", "1056", "1057", "1058", "1059", "1100", "1101", "1102", "1103", "1104", "1105", "1106", "1107", "1108", "1109","1110", "1111", "1112", "1113", "1114", "1115", "1116", "1117", "1118", "1119", "1120", "1121", "1122", "1123", "1124", "1125", "1126", "1127", "1128", "1129", "1130", "1300", "1301", "1302", "1303", "1304", "1305", "1306", "1307", "1308", "1309", "1310", "1311", "1312", "1313", "1314", "1315", "1316", "1317", "1318", "1319", "1320","1321", "1322", "1323", "1324", "1325", "1326", "1327", "1328", "1329", "1330", "1331", "1332", "1333", "1334", "1335", "1336", "1337", "1338", "1339", "1340", "1341", "1342", "1343", "1344", "1345", "1346", "1347", "1348", "1349", "1350", "1351", "1352", "1353", "1354", "1355", "1356", "1357", "1358", "1359", "1400", "1401", "1402", "1403", "1404", "1405", "1406", "1407", "1408", "1409", "1410", "1411", "1412", "1413", "1414", "1415", "1416", "1417", "1418", "1419", "1420", "1421", "1422", "1423", "1424", "1425", "1426", "1427", "1428", "1429", "1430", "1431", "1432", "1433", "1434", "1435", "1436", "1437", "1438", "1439", "1440", "1441", "1442", "1443", "1444", "1445", "1446", "1447", "1448", "1449", "1450", "1451", "1452", "1453", "1454", "1455", "1456", "1457", "1458", "1459", "1500"],
+            dataXX:[],
+            fundList:[],
+            f213:false,
+
+}
+}
+componentWillMount(){
+    this.fetch213()
+}
+
+componentDidMount(){
+    document.title = "基金透视";
+}
+
+fetch213(){
+    let body = {
+        // "lang":null,
+        "orgId":orgId,
+        "reqChl":"03",
+        "reqTime":"20180727150130123",
+        "serNum":"1234567890",
+        "sign":"SHA256withRSA2048",
+        "token":"D688D2555ED94C7285D26BDF4B13D08F",
+        "tranCode":"F213",
+        "version":"100"
+    }
+    fetch(host+"F213",{
+        method:'POST',
+        body: JSON.stringify(body),
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+    }).then((result)=>{
+        return result.json()
+    }).then((res)=>{
+        if(res.respCode==='00'&&res.fundTop1List!==null){
+            this.setState({
+                f213:true,
+                fundList:res.fundTop1List.slice(0,3)
+                // fundId01:res.fundRankList[0].fundId,
+                // fundName01:res.fundRankList[0].fundName,
+                // pchgY101:res.fundRankList[0].pchgY1,
+                // fundType01:'股票型',
+
+            })
+            // this.fetch208(res.fundRankList[0].fundId)
+            // this.fetch20702()
+        }else{
+            this.setState({
+                f213:false,
+            })
+            // setTimeout(()=>{
+            //     alert(res.respMsg)
+            // },100)
+        }
+    }).catch(err=>{
+        this.setState({
+            f213:false,
+        })
+        console.log(err)
+    })
+}
+
+
+searchInput(){
+    this.props.history.push("/search")
+}
+moreFund(){
+    this.props.history.push("fundRank")
+}
+fundDetail(fundId){
+    this.props.history.push({pathname:`/regroupFund/${fundId}`})
+}
+
+    render() {
+        return(
+            <div className="main">
+                <div className="mainTop">
+                    <div className="mainInput" onClick={()=>this.searchInput()}>
+                        <img className="mainSImg" src={require('../../imgs/mainSI.png')} alt=""/>
+                        <div className="mainST">输入基金代码或基金名称</div>
+                    </div>
+                </div>
+                <div className="fundMore">
+                    <span>基金优选</span>
+                    <a href="javascript:;" onClick={()=>this.moreFund()}>更多 ></a>
+                </div>
+                <ul className="mainFL">
+                    {
+                        this.state.f213&&this.state.fundList.map((value,index)=>{
+                            return <li className="clearfix" onClick={()=>this.fundDetail(value.fundId)} key={index}>
+                                    <div className="fl">
+                                        <FundFirst fundId ={value.fundId}/>
+                                    </div>
+                                <div className="fr">
+                                    <div className="mRT">
+                                        <div className="mFN">
+                                            {value.fundName}
+                                        </div>
+                                        <div className="sFN">
+                                            <em>{value.fundId}</em>
+                                            <span>{value.fundType}</span>
+                                        </div>
+                                    </div>
+                                    <div className="mFC">
+                                        <div className="mFF">
+                                            <span className={ value.score ? 'big' : "bigempoty" }>{ value.score ? value.score : '--' }</span>
+                                            <span className="small">综合评分</span>
+                                        </div>
+                                        <div className="mFF">
+                                            <span className="big">01</span>
+                                            <span className="small">同类排名</span>
+                                        </div>
+                                    </div>
+                                    <div className="reviserFund">
+                                        <span className="reviseSmall">近一年涨幅</span>
+                                        {value.pchgY1&&parseFloat(value.pchgY1)<0&&<span className="green reviseBig">{parseFloat(value.pchgY1*100).toFixed(2)}%</span>}
+                                        {value.pchgY1&&value.pchgY1==='--'&&<span className="red reviseBig">{value.pchgY1}</span>}
+                                        {value.pchgY1&&parseFloat(value.pchgY1)>0&&<span className="red reviseBig">{parseFloat(value.pchgY1*100).toFixed(2)}%</span>}
+                                    </div>
+                                </div>
+                            </li>
+                        })
+                    }
+                    {
+                        !this.state.f213&&this.state.fundList.length === 0 &&<li>暂无数据</li>
+                    }
+                </ul>
+            </div>
+        )
+    }
+}
+
+export default Main;
